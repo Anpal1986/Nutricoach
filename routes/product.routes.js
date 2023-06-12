@@ -44,32 +44,6 @@ router.get("/products", (req, res, next) => {
             next(e);
         });
 });
-//GET /products/:productId/edit
-router.get("/products/:productId/edit", (req, res, next) => {
-
-    const id = req.params.productId;
-
-    Product.findById(id)
-        .then(productFromDB => {
-            res.render("products/product-edit", productFromDB)
-        })
-        .catch(e => {
-            console.log("error editing this product from the DB", e)
-            next(e);
-        });
-
-});
-// UPDATE: process form
-router.post("/products/:productId/edit", (req, res, next) => {
-    const {productId}= req.params;
-    const { title, description, price } = req.body;
-
-    Product.findByIdAndUpdate(productId, { title, description, price }, { new: true })
-        .then(updatedProduct => {
-            console.log(updatedProduct.id);
-            res.redirect(`/products/${updatedProduct.id}`)}) // go to the details page to see the updates
-        .catch(error => next(error));
-});
 
 
 
@@ -87,6 +61,40 @@ router.get("/products/:productId", (req, res, next) => {
             next(e);
         });
 
+});
+
+//GET /products/:productId/edit
+router.get("/products/:productId/edit", (req, res, next) => {
+
+    const id = req.params.productId;
+
+    Product.findById(id)
+        .then(productFromDB => {
+            res.render("products/product-edit", productFromDB)
+        })
+        .catch(e => {
+            console.log("error editing this product from the DB", e)
+            next(e);
+        });
+
+});
+// UPDATE: process form
+router.post("/products/:productId/edit", (req, res, next) => {
+    const id= req.params.productId;
+    const { title, description, price } = req.body;
+    Product.findByIdAndUpdate(id, { title, description, price }, { new: true })
+        .then((updatedProduct) => res.redirect(`/products`)) // go to the details page to see the updates
+        .catch(error => next(error));
+});
+// DELETE: delete product
+router.post("/products/:productId/delete", (req, res, next) => {
+    const id = req.params.productId;
+
+  Product.findByIdAndDelete(id)
+    .then(() => res.redirect("/products"))
+    .catch((e) => {
+      console.log("Theres an error while updating the product to the db", e);
+    });
 });
 
 

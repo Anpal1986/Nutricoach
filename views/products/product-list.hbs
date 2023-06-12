@@ -7,6 +7,9 @@
             Price: {{this.price}} Eur <br />
             <a href="/products/{{this._id}}">More details</a>
             <a href="/products/{{this._id}}/edit">Edit</a>
+
+            <form method="POST" action="/products/{{this._id}}/delete">
+        <button>Delete</button>
         </p>
     </section>
 {{/each}}

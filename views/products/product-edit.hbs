@@ -1,17 +1,16 @@
+<h2>Edit the product: {{this.title}}</h2>
 
-<h2>Edit the product: {{product.title}}</h2>
-
-<form method="POST" action="/products/{{product._id}}/edit">
+<form method="POST" action="/products/{{this._id}}/edit">
     <label> Title:
-        <input type="text" name="title" value="{{product.title}}" />
+        <input type="text" name="title" value="{{this.title}}" />
     </label>
 
     <label> Description:
-        <textarea name="description" cols="30" rows="4">{{product.description}}</textarea>
+        <textarea name="description" cols="30" rows="4">{{this.description}}</textarea>
     </label>
 
     <label> Price:
-        <input type="number" name="rating" min="1" value="{{product.price}}" />
+        <input type="number" name="price" min="1" value="{{this.price}}" />
     </label>
 
     <button>Save changes</button>
