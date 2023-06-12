@@ -1,0 +1,18 @@
+
+<h2>Edit the product: {{product.title}}</h2>
+
+<form method="POST" action="/products/{{product._id}}/edit">
+    <label> Title:
+        <input type="text" name="title" value="{{product.title}}" />
+    </label>
+
+    <label> Description:
+        <textarea name="description" cols="30" rows="4">{{product.description}}</textarea>
+    </label>
+
+    <label> Price:
+        <input type="number" name="rating" min="1" value="{{product.price}}" />
+    </label>
+
+    <button>Save changes</button>
+</form>

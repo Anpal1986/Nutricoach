@@ -1,0 +1,12 @@
+<h2>List of our Products</h2>
+
+{{#each products}}
+    <section class="product-summary">
+        <h2>{{this.title}}</h2>
+        <p>
+            Price: {{this.price}} Eur <br />
+            <a href="/products/{{this._id}}">More details</a>
+            <a href="/products/{{this._id}}/edit">Edit</a>
+        </p>
+    </section>
+{{/each}}

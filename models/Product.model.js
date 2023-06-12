@@ -11,4 +11,4 @@ const productSchema = new Schema(
   }
 );
 
-module.exports = model('Product', bookSchema);
+module.exports = model('Product', productSchema);
