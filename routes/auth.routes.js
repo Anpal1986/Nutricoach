@@ -64,7 +64,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
       return User.create({ username, email, password: hashedPassword });
     })
     .then((user) => {
-      res.redirect("/auth/login");
+      res.redirect("/auth/user-profile");
     })
     .catch((error) => {
       if (error instanceof mongoose.Error.ValidationError) {
@@ -141,16 +141,21 @@ router.post("/login", isLoggedOut, (req, res, next) => {
     .catch((err) => next(err));
 });
 
-// GET /auth/logout
-router.get("/logout", isLoggedIn, (req, res) => {
+// POST /logout
+router.post("/logout", isLoggedIn, (req, res) => {
   req.session.destroy((err) => {
     if (err) {
-      res.status(500).render("auth/logout", { errorMessage: err.message });
+      res.status(500).render("/logout", { errorMessage: err.message });
       return;
     }
-
+res.clearCookie("connect.sid")
     res.redirect("/");
   });
+})
+
+//GET user-profile
+router.get("/user-profile", (req,res,next) =>{
+    res.render("auth/user-profile", {userDetails: req.session.currentUser});
 });
 
 module.exports = router;

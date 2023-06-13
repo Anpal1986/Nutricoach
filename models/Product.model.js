@@ -2,9 +2,19 @@ const { mongoose, Schema, model } = require('mongoose');
 
 const productSchema = new Schema(
   {
-    title: String,
+    title: {
+      type: String,
+      required: [true, "Title is required"],
+      unique: [true, "Duplicated title"],
+      trim: true,
+      lowercase: true
+    },
     description: String,
-    price: Number
+    price: {
+      type: Number,
+      required: [true, "Price is required"],
+      trim: true
+    }
   },
   {
     timestamps: true

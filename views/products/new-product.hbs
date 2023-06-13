@@ -14,4 +14,12 @@
   </label>
 
   <button type="submit"> Create </button>
+<hr />
+   <a href="/products">Back</a>
+
+  {{#if errorMessage}}
+      <p class="error">{{errorMessage}}</p>
+    {{/if}}
+
+   
 </form>

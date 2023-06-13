@@ -7,19 +7,27 @@ const isLoggedIn = require('../middleware/isLoggedIn');
 
 
 //GET /products/create (display form)
-router.get("/products/create", (req, res, next) => {
+router.get("/products/create",isLoggedIn, (req, res, next) => {
     res.render("products/new-product")
 });
 
 // CREATE: process form
-router.post("/products/create", (req, res, next) => {
-
+router.post("/products/create",isLoggedIn, (req, res, next) => {
     const newProduct = {
         title: req.body.title,
         description: req.body.description,
         price: req.body.price
-    }
-
+    };
+  // Check that title and price are provided
+  if (newProduct.title === "" || newProduct.price === "" ) {
+    res.status(400).render("products/new-product", {
+      errorMessage:
+        "Please provide title and price, these fields are mandatory.",
+    });
+    return;
+  }
+ 
+    
     Product.create(newProduct)
         .then( (newProduct) => {
             res.redirect("/products");
@@ -40,7 +48,7 @@ router.get("/products", (req, res, next) => {
             res.render("products/product-list", data);
         })
         .catch(e => {
-            console.log("error getting products from the DB", e)
+            console.log("error getting displaying products", e)
             next(e);
         });
 });
@@ -62,9 +70,18 @@ router.get("/products/:productId", (req, res, next) => {
         });
 
 });
+// DELETE: delete product
+router.post("/products/:productId/delete",isLoggedIn, (req, res, next) => {
+    const id = req.params.productId;
 
+  Product.findByIdAndDelete(id)
+    .then(() => res.redirect("/products"))
+    .catch((e) => {
+      console.log("Theres an error while updating the product to the db", e);
+    });
+});
 //GET /products/:productId/edit
-router.get("/products/:productId/edit", (req, res, next) => {
+router.get("/products/:productId/edit",isLoggedIn, (req, res, next) => {
 
     const id = req.params.productId;
 
@@ -79,23 +96,14 @@ router.get("/products/:productId/edit", (req, res, next) => {
 
 });
 // UPDATE: process form
-router.post("/products/:productId/edit", (req, res, next) => {
+router.post("/products/:productId/edit",isLoggedIn, (req, res, next) => {
     const id= req.params.productId;
     const { title, description, price } = req.body;
     Product.findByIdAndUpdate(id, { title, description, price }, { new: true })
         .then((updatedProduct) => res.redirect(`/products`)) // go to the details page to see the updates
         .catch(error => next(error));
 });
-// DELETE: delete product
-router.post("/products/:productId/delete", (req, res, next) => {
-    const id = req.params.productId;
 
-  Product.findByIdAndDelete(id)
-    .then(() => res.redirect("/products"))
-    .catch((e) => {
-      console.log("Theres an error while updating the product to the db", e);
-    });
-});
 
 
 
