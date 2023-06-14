@@ -5,7 +5,7 @@ const productSchema = new Schema(
     title: {
       type: String,
       required: [true, "Title is required"],
-      unique: [true, "Duplicated title"],
+      unique: [true, "This product already exists"],
       trim: true,
       lowercase: true
     },

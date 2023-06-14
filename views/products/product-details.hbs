@@ -1,13 +1,14 @@
 <h2>Product page</h2>
 
-<form method="POST" action="/products/create">
  <h2>{{this.title}}</h2>
  <p>Description: {{this.description}} <br /></p>
  <p>Price: {{this.price}} Eur <br /></p>
 <hr />
- <a href="/products">Back</a>
- </form>
 
+ <form method="POST" action="/products/{{this._id}}/delete">
+        <button type="submit">Delete</button>
+         <a href="/products">Back</a>
+</form>
 
        
             

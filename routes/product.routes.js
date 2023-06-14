@@ -33,8 +33,14 @@ router.post("/products/create",isLoggedIn, (req, res, next) => {
             res.redirect("/products");
         })
         .catch( e => {
-            console.log("error creating a new product", e);
-            next(e);
+            if(e.code===11000){
+                Product.find()
+                .then((products)=>{
+                    res.render("products/product-list", {products: products, errormsg: "Product already exists"});
+                })
+            }
+                console.log("error creating a new product", e);
+            //next(e);
         });
 });
 /* GET /products - display products */
