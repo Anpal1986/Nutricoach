@@ -40,7 +40,6 @@ router.post("/products/create",isLoggedIn, (req, res, next) => {
                 })
             }
                 console.log("error creating a new product", e);
-            //next(e);
         });
 });
 /* GET /products - display products */
