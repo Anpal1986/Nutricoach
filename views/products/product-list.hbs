@@ -1,15 +1,10 @@
-
-
 <h2>List of our Products</h2>
 {{#if errormsg}}
   <h2>{{errormsg}}</h2>
 {{/if}}
 {{#each products}}
-  <section class="product-summary">
-    <div class="product col-12 col-md-4">
-      <div class="card-body">
-        <h3 class="card-title">{{this.title}}</h3>
-        <p class="card-text">
+        <h3>{{this.title}}</h3>
+        <p>
           Price:
           {{this.price}}
           Eur
@@ -17,7 +12,4 @@
           <a href="/products/{{this._id}}">More details</a>
           <a href="/products/{{this._id}}/edit">Edit</a>
         </p>
-      </div>
-    </div>
-  </section>
 {{/each}}
