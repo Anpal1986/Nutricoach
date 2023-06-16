@@ -7,9 +7,8 @@ This corresponds to the Project2 of the bootcamp in Web Development from Ironhac
 Nutricoach is a website related to nutrition and coaching. 
 The website is containing products related to this topic, it has the following sections:
 
-- Navbar:
-
-* Left side: Home, Products, Sign up and Log in
+Navbar:
+* Left side: Home, Products, Create, Sign up and Log in
 * Right side: Log Out
 
 ### Web functionalities (navbar & restrictions)
@@ -18,7 +17,7 @@ The website is containing products related to this topic, it has the following s
     - Product title (duplicated titles are not possible)
     - Description 
     - Price
-        * The user can click on More Details or edit (functionality just for logged users))
+        * The user can click on More Details or edit (functionality just for logged in users))
 2. Under create
     - The user can create products
         * Title and price are mandatory
@@ -46,7 +45,7 @@ The website is containing products related to this topic, it has the following s
     - add the following text
     PORT=3000
 3. Run the application:
-    -Once you are on the right folder (step 1) write the command: npm run dev
+    - Once you are on the right folder (step 1) write the command: npm run dev
     - When you are connected you will receive a message: Connected to Mongo!
 
 ### Demo link (adaptable)
